@@ -5,17 +5,18 @@ import stellar.pages.LoginPage;
 import stellar.pages.RegistrationPage;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Epic("Stellar Burgers")
 @Feature("Регистрация")
 public class RegistrationTest extends BaseTest {
+    private final String browser = System.getProperty("browser", "chrome");
 
-    @ParameterizedTest(name = "Успешная регистрация в браузере {0}")
-    @ValueSource(strings = {"chrome", "yandex"})
-    public void testSuccessfulRegistration(String browser) {
+    @Test
+    @DisplayName("Успешная регистрация")
+    public void testSuccessfulRegistration() {
         runTest(browser, () -> {
             HomePage homePage = new HomePage(driver);
             homePage.clickLoginButton();
@@ -33,9 +34,9 @@ public class RegistrationTest extends BaseTest {
         });
     }
 
-    @ParameterizedTest(name = "Ошибка при некорректном пароле в браузере {0}")
-    @ValueSource(strings = {"chrome", "yandex"})
-    public void testInvalidPasswordRegistration(String browser) {
+    @Test
+    @DisplayName("Ошибка при некорректном пароле")
+    public void testInvalidPasswordRegistration() {
         runTest(browser, () -> {
             HomePage homePage = new HomePage(driver);
             homePage.clickLoginButton();
